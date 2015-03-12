@@ -1,0 +1,110 @@
+APPLICATIONS:
+
+    Tree::App
+    Tree::DB
+    Tree::DB::DBD
+    Tree::DB::DBIx
+    Tree::WWW::Mojo
+    Tree::CRONJOB
+
+INSTALLATION:
+
+This package should be decompressed into a given dir, ie: '/home/user/perl_apps/Tree'
+
+    cd /home/user/perl_apps/Tree
+    cd /home/user/perl_apps/Tree ; cd Tree-WWW-Mojo ; cpanm .
+    cd /home/user/perl_apps/Tree ; cd Tree-App ; cpanm .
+    cd /home/user/perl_apps/Tree
+
+You need not to install this package. Just go into the decompressed dir and execute the commands from there. ie: cd /home/user/perl_apps/Tree ; ./deploy.sh
+
+CREDENTIALS:
+
+keep credentials in a single place.. env.sh
+
+DEPENDENCIES:
+
+    - DBD::mysql
+    - DBIx::Class
+    - DBIx::Class::Schema::Loader
+    - Test::Simple
+    - Moo
+    - Mojolicious
+    - Data::Printer
+
+CREDENTIALS:
+The credentials are in env.sh file.
+All the perl scripts who needs credentials will source env.sh thus getting creadentials at $ENV{DB_DSN} $ENV{DB_PASS} $ENV{DB_USER}
+
+DEPLOY THE DATABASE:
+First create the mysql database and modify env.sh as needed. Then execute:
+
+    cd /home/user/perl_apps/Tree ; ./deploy.sh
+
+DESCRIPTION
+
+This software allows the creation and representation and fully management of hierarquical tree data. It allows usage from perl modules, cronjobs and from a database.
+
+This software is composed of the following modules:
+
+    Tree::App
+        
+        Tree::App is the main application class. It has a lot of tests which:
+            - clean up database
+            - create nodes
+            - delete nodes
+            - create children
+            - get complete node tree
+
+    Tree::CRONJOB
+        
+        Tree::CRONJOB is not implemented yet, but it is here to exemplify cronjob needs which can implement Tree::App to do work.
+
+    Tree::DB
+
+        Tree::DB is used by Tree::App and is the class resposible of talking with the database.
+        It can talk with the database using different backends. The only implemented backend is Tree::DB::DBIx which uses DBIx::Class to talk to db. However, Tree::DB::DBD uses DBD::mysql is not fully implemented. Allowing different backends allows easy benchmarking to choose the best option.
+
+    Tree::DB::DBD
+        
+        Tree::DB::DBD is a DB backend that talks DBD::mysql. Its used by Tree::DB.
+        * not yet 100% implemented
+
+    Tree::DB::DBIx
+        
+        Tree::DB::DBIx is a DB backend that talks DBIx::Class. Its used by Tree::DB.
+        * fully implemented
+
+    Tree::WWW::Mojo
+    
+        Tree::WWW::Mojo is the web interface of Tree::App.
+        It has been created this way to allow creation of another web interfaces with ease. ie: Tree::WWW::Catalyst or Tree::WWW::Dancer
+
+USAGE:
+
+Tree::App
+
+    run tests:
+
+        cd /home/user/perl_apps/Tree ; cd Tree-App/; ./test_dbix.sh
+
+    usage: see the tests for usage example.
+
+Tree::WWW::Mojo
+
+    run tests: 
+
+        cd /home/user/perl_apps/Tree ; cd Tree-WWW-Mojo; ./prove.sh
+   
+    start app:
+    
+        cd /home/user/perl_apps/Tree ; cd Tree-WWW-Mojo; ./start.sh
+
+        then open url: 
+            
+            http://localhost:3000
+
+
+AUTHOR:
+
+    Hernan Lopes

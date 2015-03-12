@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/css/style.css">
+        <script src="/js/head.js"></script>
+    </head>
+    <body>
+        <h1>Tree Manager</h1>
+        <div class="tree">
+            <table></table>
+            <div>
+                <span>Add Node To:</span>
+                <input name='PID' id='PID' placeholder='PID'></input>
+                <button id='add-node'>Add</button>
+            </div>
+        </div>
+        <script>
+            (function() {
+                "use strict";
+                var scripts = [
+                    '/js/jquery.js',
+                    '/js/tree.js'
+                ];
+                head.load(scripts, function() {
+                    $(document).ready(function () {
+                        var tree = new Tree();
+                        tree.html_table = $('.tree table');
+                        tree.print_tree();
+                        var is_validated = function (parent_id) {
+                            if ( ! parent_id ) {
+                                alert('Enter parent id');
+                                return false;
+                            }
+                            else if ( ! $('[data-node-id='+ parent_id +']').length ) {
+                                alert( 'Enter a valid parent id');
+                                return false;
+                            }
+                            return true;
+                        }
+
+                        var add_node = function ( ev ) {
+                            var parent_id = $('#PID').val();
+                            if ( is_validated( parent_id ) ) {
+                                tree.add_node(parent_id);
+                            }
+                        } 
+                        $('#add-node').click( add_node );
+                        $('#add-node').bind('keypress', function(e) {
+                            var code = e.keyCode || e.which;
+                            if(code == 13) {
+                                add_node;
+                            } 
+                        });
+                    }); 
+                });
+            })();
+        </script>
+    </body>
+</html>

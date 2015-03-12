@@ -1,0 +1,7 @@
+Tree::DB::DBIx
+
+This is a DBIx::Class backend for Tree::DB.
+
+The Tree::DB::DBD interfaces with DBIx::Class.
+
+* Already fully implemented

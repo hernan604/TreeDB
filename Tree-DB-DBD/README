@@ -1,0 +1,7 @@
+Tree::DB::DBD
+
+This is a DBD::mysql backend for Tree::DB.
+
+The Tree::DB::DBD interfaces with DBD::mysql.
+
+* Not yet full implemented. It should implement every method that Tree::DB::DBIx implements.

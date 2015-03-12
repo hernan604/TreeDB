@@ -1,0 +1,18 @@
+Tree::DB
+
+Tree::DB is a database abstraction layer that allows Tree::App connection and save data on databases. It allows the usage of DBIx::Class or DBD::mysql backend.
+
+The DBIx::Class implementation is: Tree::DB::DBIx::Node
+The DBD::mysql  implementation is: Tree::DB::DBD::Node
+
+See Tree::App tests for examples of usage with a DBIx::Class backend.
+
+Example of Tree-DB With a dbix class backend:
+
+    use Tree::DB;
+    use Tree::DB::DBIx;
+    my $db =
+      Tree::DB->new( backend =>
+          Tree::DB::DBIx->connect( $ENV{DB_DSN}, $ENV{DB_USER}, $ENV{DB_PASS} ) );
+    my $app = Tree::App->new( db => $db );
+    $app->cleanup;
